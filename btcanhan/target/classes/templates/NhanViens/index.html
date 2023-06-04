@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_layout">
+<head>
+<meta charset="UTF-8">
+<title>List nhân viên</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div layout:fragment="content" class="container body-content">
+		<a th:href="@{/create}" class="btn btn-primary">Thêm nhân viên</a>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Mã Nhân Viên</th>
+					<th scope="col">Tên Nhân Viên</th>
+					<th scope="col">Giới tính</th>
+					<th scope="col">Nơi Sinh</th>
+					<th scope="col">Tên Phòng ban</th>
+					<th scope="col">Lương</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="nhanvien : ${listNhanVien}">
+					<th scope="row" th:text="${nhanvien.Ma_NV}"></th>
+					<td th:text="${nhanvien.Ten_NV}"></td>
+					<!--<td><img height="120" width="150"
+						th:src="@{/static/images/}+${product.image}" /></td>  -->
+					<td><img th:if="${nhanvien.Phai == 'NAM'}"
+						src="https://banner2.cleanpng.com/20180407/jbe/kisspng-computer-icons-icon-design-men-5ac8d34f1f8a84.6146835815231107351292.jpg"
+						alt="Male Image" style="width: 50px; height: 50px;"> <img
+						th:if="${nhanvien.Phai == 'NU'}"
+						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStQ8K0-KrPrHJo2-vouP9AQyO2bH5kQiUBww&usqp=CAU"
+						alt="Female Image" style="width: 50px; height: 50px;"></td>
+					<td th:text="${nhanvien.Noi_Sinh}"></td>
+					<td th:text="${nhanvien.phongban.Ten_Phong}"></td>
+					<td th:text="${nhanvien.luong}"></td>
+
+					<td><a th:href="@{/edit/{Ma_NV}(id=${nhanvien.Ma_NV})}"
+						custom:linkMethod="post" class="btn btn-secondary">Edit</a> <a
+						th:href="@{/delete/{Ma_NV}(Ma_NV=${nhanvien.Ma_NV})}"
+						custom:linkMethod="post" class="btn btn-danger">Delete</a></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="card-footer text-center">
+		<hr />
+		Le Hoang Dang - 2080601381
+	</div>
+</body>
+</html>
